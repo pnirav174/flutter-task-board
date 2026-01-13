@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'package:drift/native.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:take_home_assignment/features/task/data/app_database.dart';
-import 'package:take_home_assignment/features/task/data/local_task_repository.dart';
-import 'package:take_home_assignment/features/task/domain/task_entity.dart';
+import 'package:flutter_task_board/features/task/data/app_database.dart';
+import 'package:flutter_task_board/features/task/data/local_task_repository.dart';
+import 'package:flutter_task_board/features/task/domain/task_entity.dart';
 import 'package:uuid/uuid.dart';
 
 void main() {

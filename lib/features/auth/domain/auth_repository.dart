@@ -1,4 +1,4 @@
-import 'package:take_home_assignment/features/auth/domain/user.dart';
+import 'package:flutter_task_board/features/auth/domain/user.dart';
 
 abstract class AuthRepository {
   Stream<AuthUser?> get authStateChanges;

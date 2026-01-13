@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:take_home_assignment/features/task/domain/task_entity.dart';
-import 'package:take_home_assignment/features/task/presentation/task_providers.dart';
+import 'package:flutter_task_board/features/task/domain/task_entity.dart';
+import 'package:flutter_task_board/features/task/presentation/task_providers.dart';
 import 'package:uuid/uuid.dart';
 
 class CreateTaskDialog extends ConsumerStatefulWidget {

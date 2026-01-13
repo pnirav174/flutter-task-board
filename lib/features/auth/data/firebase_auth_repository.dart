@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:take_home_assignment/features/auth/domain/auth_repository.dart';
-import 'package:take_home_assignment/features/auth/domain/user.dart';
+import 'package:flutter_task_board/features/auth/domain/auth_repository.dart';
+import 'package:flutter_task_board/features/auth/domain/user.dart';
 
 class FirebaseAuthRepository implements AuthRepository {
   final FirebaseAuth _firebaseAuth;

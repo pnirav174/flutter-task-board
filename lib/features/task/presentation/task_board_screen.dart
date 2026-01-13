@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:take_home_assignment/core/presentation/widgets/shimmer_widget.dart';
-import 'package:take_home_assignment/core/presentation/widgets/error_retry_widget.dart';
-import 'package:take_home_assignment/core/sync_providers.dart';
-import 'package:take_home_assignment/features/task/domain/task_entity.dart';
-import 'package:take_home_assignment/features/task/presentation/task_providers.dart';
-import 'package:take_home_assignment/features/task/presentation/widgets/task_column.dart';
-import 'package:take_home_assignment/core/sync_service.dart';
-import 'package:take_home_assignment/features/task/presentation/task_comments_sheet.dart';
+import 'package:flutter_task_board/core/presentation/widgets/shimmer_widget.dart';
+import 'package:flutter_task_board/core/presentation/widgets/error_retry_widget.dart';
+import 'package:flutter_task_board/core/sync_providers.dart';
+import 'package:flutter_task_board/features/task/domain/task_entity.dart';
+import 'package:flutter_task_board/features/task/presentation/task_providers.dart';
+import 'package:flutter_task_board/features/task/presentation/widgets/task_column.dart';
+import 'package:flutter_task_board/core/sync_service.dart';
+import 'package:flutter_task_board/features/task/presentation/task_comments_sheet.dart';
 import 'package:uuid/uuid.dart';
 
 class TaskBoardScreen extends ConsumerStatefulWidget {

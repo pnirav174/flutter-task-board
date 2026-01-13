@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:take_home_assignment/core/router.dart';
+import 'package:flutter_task_board/core/router.dart';
+import 'package:flutter_task_board/core/sync_providers.dart';
+import 'package:flutter_task_board/core/theme_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:take_home_assignment/core/sync_providers.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
-import 'package:take_home_assignment/core/theme_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

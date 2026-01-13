@@ -1,6 +1,6 @@
 import 'dart:async';
-import 'package:take_home_assignment/features/auth/domain/auth_repository.dart';
-import 'package:take_home_assignment/features/auth/domain/user.dart';
+import 'package:flutter_task_board/features/auth/domain/auth_repository.dart';
+import 'package:flutter_task_board/features/auth/domain/user.dart';
 import 'package:uuid/uuid.dart';
 
 class MockAuthRepository implements AuthRepository {

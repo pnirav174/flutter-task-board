@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'package:drift/drift.dart';
-import 'package:take_home_assignment/core/mappers.dart';
-import 'package:take_home_assignment/features/task/data/app_database.dart';
-import 'package:take_home_assignment/features/task/domain/task_entity.dart';
-import 'package:take_home_assignment/features/task/domain/comment_entity.dart';
-import 'package:take_home_assignment/features/task/domain/task_repository.dart';
+import 'package:flutter_task_board/core/mappers.dart';
+import 'package:flutter_task_board/features/task/data/app_database.dart';
+import 'package:flutter_task_board/features/task/domain/task_entity.dart';
+import 'package:flutter_task_board/features/task/domain/comment_entity.dart';
+import 'package:flutter_task_board/features/task/domain/task_repository.dart';
 
 class LocalTaskRepository implements TaskRepository {
   final AppDatabase _db;

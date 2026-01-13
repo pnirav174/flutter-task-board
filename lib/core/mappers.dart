@@ -1,10 +1,9 @@
 import 'package:drift/drift.dart';
-import 'package:take_home_assignment/features/board/domain/board.dart'
-    as domain;
-import 'package:take_home_assignment/features/task/data/app_database.dart'
+import 'package:flutter_task_board/features/board/domain/board.dart' as domain;
+import 'package:flutter_task_board/features/task/data/app_database.dart'
     as drift_db;
-import 'package:take_home_assignment/features/task/domain/task_entity.dart';
-import 'package:take_home_assignment/features/task/domain/comment_entity.dart';
+import 'package:flutter_task_board/features/task/domain/task_entity.dart';
+import 'package:flutter_task_board/features/task/domain/comment_entity.dart';
 
 extension BoardMapper on domain.Board {
   drift_db.BoardsCompanion toCompanion() {

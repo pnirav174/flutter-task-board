@@ -1,8 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:take_home_assignment/features/task/data/database_provider.dart';
-import 'package:take_home_assignment/features/task/data/local_task_repository.dart';
-import 'package:take_home_assignment/features/task/domain/task_entity.dart';
-import 'package:take_home_assignment/features/task/domain/task_repository.dart';
+import 'package:flutter_task_board/features/task/data/database_provider.dart';
+import 'package:flutter_task_board/features/task/data/local_task_repository.dart';
+import 'package:flutter_task_board/features/task/domain/task_entity.dart';
+import 'package:flutter_task_board/features/task/domain/task_repository.dart';
 
 final taskRepositoryProvider = Provider<TaskRepository>((ref) {
   final db = ref.watch(databaseProvider);

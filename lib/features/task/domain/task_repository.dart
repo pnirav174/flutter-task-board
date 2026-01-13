@@ -1,5 +1,5 @@
-import 'package:take_home_assignment/features/task/domain/task_entity.dart';
-import 'package:take_home_assignment/features/task/domain/comment_entity.dart';
+import 'package:flutter_task_board/features/task/domain/task_entity.dart';
+import 'package:flutter_task_board/features/task/domain/comment_entity.dart';
 
 abstract class TaskRepository {
   Stream<List<TaskEntity>> watchTasks(String boardId);

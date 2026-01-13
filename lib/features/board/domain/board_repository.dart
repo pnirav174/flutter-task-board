@@ -1,4 +1,4 @@
-import 'package:take_home_assignment/features/board/domain/board.dart';
+import 'package:flutter_task_board/features/board/domain/board.dart';
 
 abstract class BoardRepository {
   Stream<List<Board>> watchBoards();

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:take_home_assignment/features/task/domain/comment_entity.dart';
-import 'package:take_home_assignment/core/sync_providers.dart';
-import 'package:take_home_assignment/features/auth/presentation/auth_providers.dart';
-import 'package:take_home_assignment/features/task/presentation/task_providers.dart';
+import 'package:flutter_task_board/features/task/domain/comment_entity.dart';
+import 'package:flutter_task_board/core/sync_providers.dart';
+import 'package:flutter_task_board/features/auth/presentation/auth_providers.dart';
+import 'package:flutter_task_board/features/task/presentation/task_providers.dart';
 import 'package:uuid/uuid.dart';
 
 final taskCommentsProvider = StreamProvider.family<List<CommentEntity>, String>(

@@ -1,13 +1,12 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:take_home_assignment/features/task/data/app_database.dart';
-import 'package:take_home_assignment/features/task/data/realtime_database_repository.dart';
-import 'package:take_home_assignment/features/board/domain/board.dart'
-    as domain;
-import 'package:take_home_assignment/features/task/domain/task_entity.dart';
-import 'package:take_home_assignment/features/task/domain/comment_entity.dart';
-import 'package:take_home_assignment/core/mappers.dart';
+import 'package:flutter_task_board/features/task/data/app_database.dart';
+import 'package:flutter_task_board/features/task/data/realtime_database_repository.dart';
+import 'package:flutter_task_board/features/board/domain/board.dart' as domain;
+import 'package:flutter_task_board/features/task/domain/task_entity.dart';
+import 'package:flutter_task_board/features/task/domain/comment_entity.dart';
+import 'package:flutter_task_board/core/mappers.dart';
 // Needed for Value
 
 class SyncService {

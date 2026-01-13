@@ -1,5 +1,5 @@
 import 'package:drift/drift.dart';
-import 'package:take_home_assignment/features/task/data/app_database.tables.dart';
+import 'package:flutter_task_board/features/task/data/app_database.tables.dart';
 
 part 'app_database.g.dart';
 

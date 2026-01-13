@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:take_home_assignment/core/sync_providers.dart';
-import 'package:take_home_assignment/features/task/domain/task_entity.dart';
-import 'package:take_home_assignment/features/task/presentation/task_board_screen.dart';
-import 'package:take_home_assignment/features/task/presentation/task_providers.dart';
+import 'package:flutter_task_board/core/sync_providers.dart';
+import 'package:flutter_task_board/features/task/domain/task_entity.dart';
+import 'package:flutter_task_board/features/task/presentation/task_board_screen.dart';
+import 'package:flutter_task_board/features/task/presentation/task_providers.dart';
 
 import '../helpers/test_helpers.mocks.dart';
 

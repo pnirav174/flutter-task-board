@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:take_home_assignment/core/theme_provider.dart';
-import 'package:take_home_assignment/features/auth/presentation/auth_providers.dart';
+import 'package:flutter_task_board/core/theme_provider.dart';
+import 'package:flutter_task_board/features/auth/presentation/auth_providers.dart';
 
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});

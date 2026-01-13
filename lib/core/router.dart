@@ -1,11 +1,11 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:take_home_assignment/features/auth/presentation/auth_providers.dart';
-import 'package:take_home_assignment/features/auth/presentation/login_screen.dart';
-import 'package:take_home_assignment/features/auth/presentation/signup_screen.dart';
-import 'package:take_home_assignment/features/board/presentation/board_list_screen.dart';
-import 'package:take_home_assignment/features/task/presentation/task_board_screen.dart';
-import 'package:take_home_assignment/features/settings/presentation/settings_screen.dart';
+import 'package:flutter_task_board/features/auth/presentation/auth_providers.dart';
+import 'package:flutter_task_board/features/auth/presentation/login_screen.dart';
+import 'package:flutter_task_board/features/auth/presentation/signup_screen.dart';
+import 'package:flutter_task_board/features/board/presentation/board_list_screen.dart';
+import 'package:flutter_task_board/features/task/presentation/task_board_screen.dart';
+import 'package:flutter_task_board/features/settings/presentation/settings_screen.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
   final authState = ref.watch(authStateProvider);

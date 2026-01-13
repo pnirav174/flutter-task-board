@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:take_home_assignment/features/task/domain/task_entity.dart';
-import 'package:take_home_assignment/features/task/presentation/widgets/task_card.dart';
+import 'package:flutter_task_board/features/task/domain/task_entity.dart';
+import 'package:flutter_task_board/features/task/presentation/widgets/task_card.dart';
 
 class TaskColumn extends StatelessWidget {
   final String title;

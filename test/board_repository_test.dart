@@ -1,7 +1,7 @@
 import 'package:drift/native.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:take_home_assignment/features/board/data/local_board_repository.dart';
-import 'package:take_home_assignment/features/task/data/app_database.dart';
+import 'package:flutter_task_board/features/board/data/local_board_repository.dart';
+import 'package:flutter_task_board/features/task/data/app_database.dart';
 
 void main() {
   late AppDatabase db;

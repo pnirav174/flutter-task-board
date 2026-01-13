@@ -1,8 +1,8 @@
 import 'package:drift/native.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-import 'package:take_home_assignment/core/sync_service.dart';
-import 'package:take_home_assignment/features/task/data/app_database.dart';
+import 'package:flutter_task_board/core/sync_service.dart';
+import 'package:flutter_task_board/features/task/data/app_database.dart';
 import 'package:uuid/uuid.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 // For Value

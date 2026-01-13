@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
-import 'package:take_home_assignment/features/board/presentation/board_providers.dart';
-import 'package:take_home_assignment/features/board/domain/board.dart'
-    as domain;
-import 'package:take_home_assignment/core/presentation/widgets/shimmer_widget.dart';
-import 'package:take_home_assignment/core/presentation/widgets/error_retry_widget.dart';
+import 'package:flutter_task_board/features/board/presentation/board_providers.dart';
+import 'package:flutter_task_board/features/board/domain/board.dart' as domain;
+import 'package:flutter_task_board/core/presentation/widgets/shimmer_widget.dart';
+import 'package:flutter_task_board/core/presentation/widgets/error_retry_widget.dart';
 
 class BoardListScreen extends ConsumerWidget {
   const BoardListScreen({super.key});

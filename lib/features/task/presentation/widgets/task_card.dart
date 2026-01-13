@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:take_home_assignment/features/task/domain/task_entity.dart';
+import 'package:flutter_task_board/features/task/domain/task_entity.dart';
 import 'package:intl/intl.dart';
 
 class TaskCard extends StatelessWidget {

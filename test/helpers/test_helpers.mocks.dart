@@ -9,20 +9,20 @@ import 'package:connectivity_plus/connectivity_plus.dart' as _i11;
 import 'package:connectivity_plus_platform_interface/connectivity_plus_platform_interface.dart'
     as _i12;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:take_home_assignment/core/sync_service.dart' as _i13;
-import 'package:take_home_assignment/features/auth/domain/auth_repository.dart'
+import 'package:flutter_task_board/core/sync_service.dart' as _i13;
+import 'package:flutter_task_board/features/auth/domain/auth_repository.dart'
     as _i9;
-import 'package:take_home_assignment/features/auth/domain/user.dart' as _i2;
-import 'package:take_home_assignment/features/board/domain/board.dart' as _i8;
-import 'package:take_home_assignment/features/board/domain/board_repository.dart'
+import 'package:flutter_task_board/features/auth/domain/user.dart' as _i2;
+import 'package:flutter_task_board/features/board/domain/board.dart' as _i8;
+import 'package:flutter_task_board/features/board/domain/board_repository.dart'
     as _i7;
-import 'package:take_home_assignment/features/task/data/realtime_database_repository.dart'
+import 'package:flutter_task_board/features/task/data/realtime_database_repository.dart'
     as _i10;
-import 'package:take_home_assignment/features/task/domain/comment_entity.dart'
+import 'package:flutter_task_board/features/task/domain/comment_entity.dart'
     as _i6;
-import 'package:take_home_assignment/features/task/domain/task_entity.dart'
+import 'package:flutter_task_board/features/task/domain/task_entity.dart'
     as _i5;
-import 'package:take_home_assignment/features/task/domain/task_repository.dart'
+import 'package:flutter_task_board/features/task/domain/task_repository.dart'
     as _i3;
 
 // ignore_for_file: type=lint

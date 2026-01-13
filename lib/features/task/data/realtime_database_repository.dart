@@ -1,7 +1,7 @@
 import 'package:firebase_database/firebase_database.dart';
-import 'package:take_home_assignment/features/board/domain/board.dart';
-import 'package:take_home_assignment/features/task/domain/task_entity.dart';
-import 'package:take_home_assignment/features/task/domain/comment_entity.dart';
+import 'package:flutter_task_board/features/board/domain/board.dart';
+import 'package:flutter_task_board/features/task/domain/task_entity.dart';
+import 'package:flutter_task_board/features/task/domain/comment_entity.dart';
 
 class RealtimeDatabaseRepository {
   final FirebaseDatabase _db;
