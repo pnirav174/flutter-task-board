@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "569898989301",
+    "firebase_url": "https://loginsignupdemo-dc440-default-rtdb.firebaseio.com",
+    "project_id": "loginsignupdemo-dc440",
+    "storage_bucket": "loginsignupdemo-dc440.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:569898989301:android:c735978f9dbb44e3b5b7bc",
+        "android_client_info": {
+          "package_name": "com.demo.loginsignup"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtEL5SgzdV3NXa6w2NokGMY8R8Wsc48h0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:569898989301:android:333c39e115235c84b5b7bc",
+        "android_client_info": {
+          "package_name": "com.example.flutter_demo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtEL5SgzdV3NXa6w2NokGMY8R8Wsc48h0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:569898989301:android:24260da7563d0667b5b7bc",
+        "android_client_info": {
+          "package_name": "com.example.take_home_assignment"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtEL5SgzdV3NXa6w2NokGMY8R8Wsc48h0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
