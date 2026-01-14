@@ -460,12 +460,39 @@ class _CreateTaskDialogState extends ConsumerState<CreateTaskDialog> {
                         showModalBottomSheet(
                           context: context,
                           isScrollControlled: true,
-                          builder: (context) => SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.7,
-                            child: TaskCommentsSheet(
-                              taskId: widget.taskToEdit!.id,
-                            ),
-                          ),
+                          useSafeArea: true, // Add this line
+                          backgroundColor: Colors.transparent,
+                          builder: (context) {
+                            return DraggableScrollableSheet(
+                              initialChildSize: 1.0,
+                              minChildSize: 0.3,
+                              maxChildSize: 1.0,
+                              snap: true,
+                              snapSizes: const [0.3, 1.0],
+                              builder: (innerContext, scrollController) {
+                                final topInset = MediaQuery.of(
+                                  innerContext,
+                                ).padding.top;
+                                print(
+                                  'Top inset after useSafeArea: $topInset',
+                                ); // Should now work
+
+                                return Padding(
+                                  padding: EdgeInsets.only(top: topInset + 20),
+                                  child: Material(
+                                    borderRadius: const BorderRadius.vertical(
+                                      top: Radius.circular(16),
+                                    ),
+                                    clipBehavior: Clip.antiAlias,
+                                    child: TaskCommentsSheet(
+                                      taskId: widget.taskToEdit!.id,
+                                      scrollController: scrollController,
+                                    ),
+                                  ),
+                                );
+                              },
+                            );
+                          },
                         );
                       },
                       icon: const Icon(Icons.comment),

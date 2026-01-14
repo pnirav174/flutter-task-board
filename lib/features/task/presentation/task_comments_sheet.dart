@@ -16,8 +16,12 @@ final taskCommentsProvider = StreamProvider.family<List<CommentEntity>, String>(
 
 class TaskCommentsSheet extends ConsumerStatefulWidget {
   final String taskId;
-
-  const TaskCommentsSheet({super.key, required this.taskId});
+  final ScrollController scrollController;
+  const TaskCommentsSheet({
+    super.key,
+    required this.taskId,
+    required this.scrollController,
+  });
 
   @override
   ConsumerState<TaskCommentsSheet> createState() => _TaskCommentsSheetState();
@@ -93,6 +97,7 @@ class _TaskCommentsSheetState extends ConsumerState<TaskCommentsSheet> {
                   ..sort((a, b) => b.createdAt.compareTo(a.createdAt));
 
                 return ListView.builder(
+                  controller: widget.scrollController,
                   itemCount: sorted.length,
                   itemBuilder: (context, index) {
                     final c = sorted[index];
