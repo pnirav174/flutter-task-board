@@ -2,6 +2,11 @@
 
 A robust, offline-first mobile application for real-time task management and collaboration. Built with Flutter, utilizing **Drift (SQLite)** for local persistence and **Firebase Realtime Database** for instant synchronization.
 
+## 🎥 Demo Video
+
+A short walkthrough demonstrating authentication, real-time collaboration, offline support, and task management features.  
+👉 [Watch Demo Video](https://drive.google.com/file/d/1AwrwBvyK_KGEZ5LrdnO3p5WTI-TC16Oh/view)
+
 ---
 
 ## � Features Implemented (Core Requirements)
