@@ -20,6 +20,8 @@ class Tasks extends Table {
   TextColumn get assigneeId => text().nullable()();
   DateTimeColumn get createdAt => dateTime()();
   DateTimeColumn get updatedAt => dateTime()();
+  TextColumn get permissions => text().withDefault(const Constant('{}'))();
+  BoolColumn get isArchived => boolean().withDefault(const Constant(false))();
 
   @override
   Set<Column> get primaryKey => {id};

@@ -28,6 +28,8 @@ void main() {
         description: 'Desc',
         status: TaskStatus.todo,
         priority: TaskPriority.low,
+        permissions: const {},
+        isArchived: false,
         createdAt: DateTime.now(),
         updatedAt: DateTime.now(),
       );
@@ -57,6 +59,8 @@ void main() {
         description: 'Desc',
         status: TaskStatus.todo,
         priority: TaskPriority.low,
+        permissions: const {},
+        isArchived: false,
         createdAt: DateTime.now(),
         updatedAt: DateTime.now(),
       );
@@ -75,6 +79,8 @@ void main() {
         description: task.description,
         status: task.status,
         priority: task.priority,
+        permissions: task.permissions,
+        isArchived: task.isArchived,
         createdAt: task.createdAt,
         updatedAt: DateTime.now(),
       );
@@ -99,6 +105,8 @@ void main() {
         description: 'Desc',
         status: TaskStatus.todo,
         priority: TaskPriority.low,
+        permissions: const {},
+        isArchived: false,
         createdAt: DateTime.now(),
         updatedAt: DateTime.now(),
       );

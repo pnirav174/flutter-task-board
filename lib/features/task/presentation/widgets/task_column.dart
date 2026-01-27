@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_task_board/features/task/domain/task_entity.dart';
 import 'package:flutter_task_board/features/task/presentation/widgets/task_card.dart';
 
@@ -8,6 +9,7 @@ class TaskColumn extends StatelessWidget {
   final List<TaskEntity> tasks;
   final Function(TaskEntity task, TaskStatus newStatus) onTaskDropped;
   final Function(TaskEntity task) onTaskTap;
+  final Function(TaskEntity task)? onTaskDismissed;
 
   const TaskColumn({
     super.key,
@@ -16,13 +18,17 @@ class TaskColumn extends StatelessWidget {
     required this.tasks,
     required this.onTaskDropped,
     required this.onTaskTap,
+    this.onTaskDismissed,
   });
 
   @override
   Widget build(BuildContext context) {
     return DragTarget<TaskEntity>(
       onWillAcceptWithDetails: (task) => task.data.status != status,
-      onAcceptWithDetails: (task) => onTaskDropped(task.data, status),
+      onAcceptWithDetails: (task) {
+        HapticFeedback.mediumImpact();
+        onTaskDropped(task.data, status);
+      },
       builder: (context, candidateData, rejectedData) {
         return Container(
           width: 300,
@@ -75,9 +81,23 @@ class TaskColumn extends StatelessWidget {
                   ),
                   itemCount: tasks.length,
                   itemBuilder: (context, index) {
-                    return TaskCard(
-                      task: tasks[index],
-                      onTap: () => onTaskTap(tasks[index]),
+                    final task = tasks[index];
+                    return Dismissible(
+                      key: ValueKey(task.id),
+                      direction: DismissDirection.endToStart,
+                      background: Container(
+                        alignment: Alignment.centerRight,
+                        padding: const EdgeInsets.only(right: 20.0),
+                        decoration: BoxDecoration(
+                          color: Colors.red,
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: const Icon(Icons.delete, color: Colors.white),
+                      ),
+                      onDismissed: (direction) {
+                        onTaskDismissed?.call(task);
+                      },
+                      child: TaskCard(task: task, onTap: () => onTaskTap(task)),
                     );
                   },
                 ),

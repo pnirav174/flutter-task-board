@@ -4,6 +4,8 @@ enum TaskStatus { todo, inProgress, done }
 
 enum TaskPriority { low, medium, high }
 
+enum TaskRole { editor, viewer }
+
 class TaskEntity extends Equatable {
   final String id;
   final String boardId;
@@ -13,6 +15,8 @@ class TaskEntity extends Equatable {
   final TaskPriority priority;
   final DateTime? dueDate;
   final String? assigneeId;
+  final Map<String, TaskRole> permissions; // userId -> role
+  final bool isArchived;
   final DateTime createdAt;
   final DateTime updatedAt;
 
@@ -25,6 +29,8 @@ class TaskEntity extends Equatable {
     required this.priority,
     this.dueDate,
     this.assigneeId,
+    required this.permissions,
+    this.isArchived = false,
     required this.createdAt,
     required this.updatedAt,
   });
@@ -39,7 +45,16 @@ class TaskEntity extends Equatable {
     priority,
     dueDate,
     assigneeId,
+    permissions,
+    isArchived,
     createdAt,
     updatedAt,
   ];
+
+  bool canEdit(String userId) {
+    if (permissions.containsKey(userId)) {
+      return permissions[userId] == TaskRole.editor;
+    }
+    return false;
+  }
 }

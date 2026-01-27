@@ -41,6 +41,10 @@ class LocalTaskRepository implements TaskRepository {
                   'updatedAt': task.updatedAt.toIso8601String(),
                   'dueDate': task.dueDate?.toIso8601String(),
                   'assigneeId': task.assigneeId,
+                  'permissions': task.permissions.map(
+                    (k, v) => MapEntry(k, v.name),
+                  ),
+                  'isArchived': task.isArchived,
                 }),
               ),
               createdAt: Value(DateTime.now()),
@@ -72,6 +76,10 @@ class LocalTaskRepository implements TaskRepository {
                   'updatedAt': task.updatedAt.toIso8601String(),
                   'dueDate': task.dueDate?.toIso8601String(),
                   'assigneeId': task.assigneeId,
+                  'permissions': task.permissions.map(
+                    (k, v) => MapEntry(k, v.name),
+                  ),
+                  'isArchived': task.isArchived,
                 }),
               ),
               createdAt: Value(DateTime.now()),

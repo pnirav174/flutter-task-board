@@ -53,6 +53,8 @@ class RealtimeDatabaseRepository {
       'updatedAt': task.updatedAt.toIso8601String(),
       'dueDate': task.dueDate?.toIso8601String(),
       'assigneeId': task.assigneeId,
+      'permissions': task.permissions.map((k, v) => MapEntry(k, v.name)),
+      'isArchived': task.isArchived,
     });
   }
 
@@ -75,6 +77,13 @@ class RealtimeDatabaseRepository {
           final data = snapshot.value as Map;
           return data.values.map((value) {
             final map = Map<String, dynamic>.from(value as Map);
+
+            final permissionsMap = map['permissions'] as Map? ?? {};
+            final permissions = permissionsMap.map(
+              (k, v) =>
+                  MapEntry(k as String, TaskRole.values.byName(v as String)),
+            );
+
             return TaskEntity(
               id: map['id'],
               boardId: map['boardId'],
@@ -88,6 +97,8 @@ class RealtimeDatabaseRepository {
                   ? DateTime.parse(map['dueDate'])
                   : null,
               assigneeId: map['assigneeId'],
+              permissions: permissions,
+              isArchived: map['isArchived'] ?? false,
             );
           }).toList();
         });

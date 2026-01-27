@@ -197,6 +197,8 @@ class _CreateTaskDialogState extends ConsumerState<CreateTaskDialog> {
         priority: _priority,
         dueDate: _dueDate,
         assigneeId: assignee,
+        permissions: widget.taskToEdit!.permissions,
+        isArchived: widget.taskToEdit!.isArchived,
         createdAt: widget.taskToEdit!.createdAt,
         updatedAt: DateTime.now(),
       );
@@ -211,6 +213,8 @@ class _CreateTaskDialogState extends ConsumerState<CreateTaskDialog> {
         priority: _priority,
         dueDate: _dueDate,
         assigneeId: assignee,
+        permissions: const {},
+        isArchived: false,
         createdAt: DateTime.now(),
         updatedAt: DateTime.now(),
       );

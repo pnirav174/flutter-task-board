@@ -368,6 +368,33 @@ class $TasksTable extends Tasks with TableInfo<$TasksTable, Task> {
     type: DriftSqlType.dateTime,
     requiredDuringInsert: true,
   );
+  static const VerificationMeta _permissionsMeta = const VerificationMeta(
+    'permissions',
+  );
+  @override
+  late final GeneratedColumn<String> permissions = GeneratedColumn<String>(
+    'permissions',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant('{}'),
+  );
+  static const VerificationMeta _isArchivedMeta = const VerificationMeta(
+    'isArchived',
+  );
+  @override
+  late final GeneratedColumn<bool> isArchived = GeneratedColumn<bool>(
+    'is_archived',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("is_archived" IN (0, 1))',
+    ),
+    defaultValue: const Constant(false),
+  );
   @override
   List<GeneratedColumn> get $columns => [
     id,
@@ -380,6 +407,8 @@ class $TasksTable extends Tasks with TableInfo<$TasksTable, Task> {
     assigneeId,
     createdAt,
     updatedAt,
+    permissions,
+    isArchived,
   ];
   @override
   String get aliasedName => _alias ?? actualTableName;
@@ -469,6 +498,21 @@ class $TasksTable extends Tasks with TableInfo<$TasksTable, Task> {
     } else if (isInserting) {
       context.missing(_updatedAtMeta);
     }
+    if (data.containsKey('permissions')) {
+      context.handle(
+        _permissionsMeta,
+        permissions.isAcceptableOrUnknown(
+          data['permissions']!,
+          _permissionsMeta,
+        ),
+      );
+    }
+    if (data.containsKey('is_archived')) {
+      context.handle(
+        _isArchivedMeta,
+        isArchived.isAcceptableOrUnknown(data['is_archived']!, _isArchivedMeta),
+      );
+    }
     return context;
   }
 
@@ -518,6 +562,14 @@ class $TasksTable extends Tasks with TableInfo<$TasksTable, Task> {
         DriftSqlType.dateTime,
         data['${effectivePrefix}updated_at'],
       )!,
+      permissions: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}permissions'],
+      )!,
+      isArchived: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}is_archived'],
+      )!,
     );
   }
 
@@ -538,6 +590,8 @@ class Task extends DataClass implements Insertable<Task> {
   final String? assigneeId;
   final DateTime createdAt;
   final DateTime updatedAt;
+  final String permissions;
+  final bool isArchived;
   const Task({
     required this.id,
     required this.boardId,
@@ -549,6 +603,8 @@ class Task extends DataClass implements Insertable<Task> {
     this.assigneeId,
     required this.createdAt,
     required this.updatedAt,
+    required this.permissions,
+    required this.isArchived,
   });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
@@ -567,6 +623,8 @@ class Task extends DataClass implements Insertable<Task> {
     }
     map['created_at'] = Variable<DateTime>(createdAt);
     map['updated_at'] = Variable<DateTime>(updatedAt);
+    map['permissions'] = Variable<String>(permissions);
+    map['is_archived'] = Variable<bool>(isArchived);
     return map;
   }
 
@@ -586,6 +644,8 @@ class Task extends DataClass implements Insertable<Task> {
           : Value(assigneeId),
       createdAt: Value(createdAt),
       updatedAt: Value(updatedAt),
+      permissions: Value(permissions),
+      isArchived: Value(isArchived),
     );
   }
 
@@ -605,6 +665,8 @@ class Task extends DataClass implements Insertable<Task> {
       assigneeId: serializer.fromJson<String?>(json['assigneeId']),
       createdAt: serializer.fromJson<DateTime>(json['createdAt']),
       updatedAt: serializer.fromJson<DateTime>(json['updatedAt']),
+      permissions: serializer.fromJson<String>(json['permissions']),
+      isArchived: serializer.fromJson<bool>(json['isArchived']),
     );
   }
   @override
@@ -621,6 +683,8 @@ class Task extends DataClass implements Insertable<Task> {
       'assigneeId': serializer.toJson<String?>(assigneeId),
       'createdAt': serializer.toJson<DateTime>(createdAt),
       'updatedAt': serializer.toJson<DateTime>(updatedAt),
+      'permissions': serializer.toJson<String>(permissions),
+      'isArchived': serializer.toJson<bool>(isArchived),
     };
   }
 
@@ -635,6 +699,8 @@ class Task extends DataClass implements Insertable<Task> {
     Value<String?> assigneeId = const Value.absent(),
     DateTime? createdAt,
     DateTime? updatedAt,
+    String? permissions,
+    bool? isArchived,
   }) => Task(
     id: id ?? this.id,
     boardId: boardId ?? this.boardId,
@@ -646,6 +712,8 @@ class Task extends DataClass implements Insertable<Task> {
     assigneeId: assigneeId.present ? assigneeId.value : this.assigneeId,
     createdAt: createdAt ?? this.createdAt,
     updatedAt: updatedAt ?? this.updatedAt,
+    permissions: permissions ?? this.permissions,
+    isArchived: isArchived ?? this.isArchived,
   );
   Task copyWithCompanion(TasksCompanion data) {
     return Task(
@@ -663,6 +731,12 @@ class Task extends DataClass implements Insertable<Task> {
           : this.assigneeId,
       createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
       updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
+      permissions: data.permissions.present
+          ? data.permissions.value
+          : this.permissions,
+      isArchived: data.isArchived.present
+          ? data.isArchived.value
+          : this.isArchived,
     );
   }
 
@@ -678,7 +752,9 @@ class Task extends DataClass implements Insertable<Task> {
           ..write('dueDate: $dueDate, ')
           ..write('assigneeId: $assigneeId, ')
           ..write('createdAt: $createdAt, ')
-          ..write('updatedAt: $updatedAt')
+          ..write('updatedAt: $updatedAt, ')
+          ..write('permissions: $permissions, ')
+          ..write('isArchived: $isArchived')
           ..write(')'))
         .toString();
   }
@@ -695,6 +771,8 @@ class Task extends DataClass implements Insertable<Task> {
     assigneeId,
     createdAt,
     updatedAt,
+    permissions,
+    isArchived,
   );
   @override
   bool operator ==(Object other) =>
@@ -709,7 +787,9 @@ class Task extends DataClass implements Insertable<Task> {
           other.dueDate == this.dueDate &&
           other.assigneeId == this.assigneeId &&
           other.createdAt == this.createdAt &&
-          other.updatedAt == this.updatedAt);
+          other.updatedAt == this.updatedAt &&
+          other.permissions == this.permissions &&
+          other.isArchived == this.isArchived);
 }
 
 class TasksCompanion extends UpdateCompanion<Task> {
@@ -723,6 +803,8 @@ class TasksCompanion extends UpdateCompanion<Task> {
   final Value<String?> assigneeId;
   final Value<DateTime> createdAt;
   final Value<DateTime> updatedAt;
+  final Value<String> permissions;
+  final Value<bool> isArchived;
   final Value<int> rowid;
   const TasksCompanion({
     this.id = const Value.absent(),
@@ -735,6 +817,8 @@ class TasksCompanion extends UpdateCompanion<Task> {
     this.assigneeId = const Value.absent(),
     this.createdAt = const Value.absent(),
     this.updatedAt = const Value.absent(),
+    this.permissions = const Value.absent(),
+    this.isArchived = const Value.absent(),
     this.rowid = const Value.absent(),
   });
   TasksCompanion.insert({
@@ -748,6 +832,8 @@ class TasksCompanion extends UpdateCompanion<Task> {
     this.assigneeId = const Value.absent(),
     required DateTime createdAt,
     required DateTime updatedAt,
+    this.permissions = const Value.absent(),
+    this.isArchived = const Value.absent(),
     this.rowid = const Value.absent(),
   }) : id = Value(id),
        boardId = Value(boardId),
@@ -768,6 +854,8 @@ class TasksCompanion extends UpdateCompanion<Task> {
     Expression<String>? assigneeId,
     Expression<DateTime>? createdAt,
     Expression<DateTime>? updatedAt,
+    Expression<String>? permissions,
+    Expression<bool>? isArchived,
     Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
@@ -781,6 +869,8 @@ class TasksCompanion extends UpdateCompanion<Task> {
       if (assigneeId != null) 'assignee_id': assigneeId,
       if (createdAt != null) 'created_at': createdAt,
       if (updatedAt != null) 'updated_at': updatedAt,
+      if (permissions != null) 'permissions': permissions,
+      if (isArchived != null) 'is_archived': isArchived,
       if (rowid != null) 'rowid': rowid,
     });
   }
@@ -796,6 +886,8 @@ class TasksCompanion extends UpdateCompanion<Task> {
     Value<String?>? assigneeId,
     Value<DateTime>? createdAt,
     Value<DateTime>? updatedAt,
+    Value<String>? permissions,
+    Value<bool>? isArchived,
     Value<int>? rowid,
   }) {
     return TasksCompanion(
@@ -809,6 +901,8 @@ class TasksCompanion extends UpdateCompanion<Task> {
       assigneeId: assigneeId ?? this.assigneeId,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
+      permissions: permissions ?? this.permissions,
+      isArchived: isArchived ?? this.isArchived,
       rowid: rowid ?? this.rowid,
     );
   }
@@ -846,6 +940,12 @@ class TasksCompanion extends UpdateCompanion<Task> {
     if (updatedAt.present) {
       map['updated_at'] = Variable<DateTime>(updatedAt.value);
     }
+    if (permissions.present) {
+      map['permissions'] = Variable<String>(permissions.value);
+    }
+    if (isArchived.present) {
+      map['is_archived'] = Variable<bool>(isArchived.value);
+    }
     if (rowid.present) {
       map['rowid'] = Variable<int>(rowid.value);
     }
@@ -865,6 +965,8 @@ class TasksCompanion extends UpdateCompanion<Task> {
           ..write('assigneeId: $assigneeId, ')
           ..write('createdAt: $createdAt, ')
           ..write('updatedAt: $updatedAt, ')
+          ..write('permissions: $permissions, ')
+          ..write('isArchived: $isArchived, ')
           ..write('rowid: $rowid')
           ..write(')'))
         .toString();
@@ -1925,6 +2027,8 @@ typedef $$TasksTableCreateCompanionBuilder =
       Value<String?> assigneeId,
       required DateTime createdAt,
       required DateTime updatedAt,
+      Value<String> permissions,
+      Value<bool> isArchived,
       Value<int> rowid,
     });
 typedef $$TasksTableUpdateCompanionBuilder =
@@ -1939,6 +2043,8 @@ typedef $$TasksTableUpdateCompanionBuilder =
       Value<String?> assigneeId,
       Value<DateTime> createdAt,
       Value<DateTime> updatedAt,
+      Value<String> permissions,
+      Value<bool> isArchived,
       Value<int> rowid,
     });
 
@@ -2034,6 +2140,16 @@ class $$TasksTableFilterComposer extends Composer<_$AppDatabase, $TasksTable> {
 
   ColumnFilters<DateTime> get updatedAt => $composableBuilder(
     column: $table.updatedAt,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get permissions => $composableBuilder(
+    column: $table.permissions,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<bool> get isArchived => $composableBuilder(
+    column: $table.isArchived,
     builder: (column) => ColumnFilters(column),
   );
 
@@ -2140,6 +2256,16 @@ class $$TasksTableOrderingComposer
     builder: (column) => ColumnOrderings(column),
   );
 
+  ColumnOrderings<String> get permissions => $composableBuilder(
+    column: $table.permissions,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<bool> get isArchived => $composableBuilder(
+    column: $table.isArchived,
+    builder: (column) => ColumnOrderings(column),
+  );
+
   $$BoardsTableOrderingComposer get boardId {
     final $$BoardsTableOrderingComposer composer = $composerBuilder(
       composer: this,
@@ -2203,6 +2329,16 @@ class $$TasksTableAnnotationComposer
 
   GeneratedColumn<DateTime> get updatedAt =>
       $composableBuilder(column: $table.updatedAt, builder: (column) => column);
+
+  GeneratedColumn<String> get permissions => $composableBuilder(
+    column: $table.permissions,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<bool> get isArchived => $composableBuilder(
+    column: $table.isArchived,
+    builder: (column) => column,
+  );
 
   $$BoardsTableAnnotationComposer get boardId {
     final $$BoardsTableAnnotationComposer composer = $composerBuilder(
@@ -2291,6 +2427,8 @@ class $$TasksTableTableManager
                 Value<String?> assigneeId = const Value.absent(),
                 Value<DateTime> createdAt = const Value.absent(),
                 Value<DateTime> updatedAt = const Value.absent(),
+                Value<String> permissions = const Value.absent(),
+                Value<bool> isArchived = const Value.absent(),
                 Value<int> rowid = const Value.absent(),
               }) => TasksCompanion(
                 id: id,
@@ -2303,6 +2441,8 @@ class $$TasksTableTableManager
                 assigneeId: assigneeId,
                 createdAt: createdAt,
                 updatedAt: updatedAt,
+                permissions: permissions,
+                isArchived: isArchived,
                 rowid: rowid,
               ),
           createCompanionCallback:
@@ -2317,6 +2457,8 @@ class $$TasksTableTableManager
                 Value<String?> assigneeId = const Value.absent(),
                 required DateTime createdAt,
                 required DateTime updatedAt,
+                Value<String> permissions = const Value.absent(),
+                Value<bool> isArchived = const Value.absent(),
                 Value<int> rowid = const Value.absent(),
               }) => TasksCompanion.insert(
                 id: id,
@@ -2329,6 +2471,8 @@ class $$TasksTableTableManager
                 assigneeId: assigneeId,
                 createdAt: createdAt,
                 updatedAt: updatedAt,
+                permissions: permissions,
+                isArchived: isArchived,
                 rowid: rowid,
               ),
           withReferenceMapper: (p0) => p0

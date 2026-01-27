@@ -217,6 +217,9 @@ class SyncService {
                   ? DateTime.parse(data['dueDate'])
                   : null,
               assigneeId: data['assigneeId'],
+              permissions: (data['permissions'] as Map<String, dynamic>? ?? {})
+                  .map((k, v) => MapEntry(k, TaskRole.values.byName(v))),
+              isArchived: data['isArchived'] ?? false,
             );
             await _remoteRepo.pushTask(task);
           } else if (item.mutationType == 'delete') {

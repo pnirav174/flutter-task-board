@@ -30,7 +30,9 @@ class _TaskBoardScreenState extends ConsumerState<TaskBoardScreen> {
   final _searchController = TextEditingController();
   final _assigneeFilterController = TextEditingController();
   TaskPriority? _priorityFilter;
+
   String? _dueDateFilter; // 'all', 'overdue', 'today', 'upcoming'
+  bool _showArchived = false;
 
   @override
   void initState() {
@@ -52,6 +54,13 @@ class _TaskBoardScreenState extends ConsumerState<TaskBoardScreen> {
 
   List<TaskEntity> _filterTasks(List<TaskEntity> tasks) {
     return tasks.where((t) {
+      // Archived Filter - This must be first
+      if (_showArchived) {
+        if (!t.isArchived) return false;
+      } else {
+        if (t.isArchived) return false;
+      }
+
       // Search (Title/Description)
       if (_searchController.text.isNotEmpty) {
         final query = _searchController.text.toLowerCase();
@@ -161,6 +170,7 @@ class _TaskBoardScreenState extends ConsumerState<TaskBoardScreen> {
                     onTaskDropped: (task, status) =>
                         _updateTaskStatus(ref, task, status),
                     onTaskTap: (task) => _openTaskDetails(context, task),
+                    onTaskDismissed: (task) => _deleteTask(context, ref, task),
                   ),
                   TaskColumn(
                     title: 'In Progress',
@@ -169,6 +179,7 @@ class _TaskBoardScreenState extends ConsumerState<TaskBoardScreen> {
                     onTaskDropped: (task, status) =>
                         _updateTaskStatus(ref, task, status),
                     onTaskTap: (task) => _openTaskDetails(context, task),
+                    onTaskDismissed: (task) => _deleteTask(context, ref, task),
                   ),
                   TaskColumn(
                     title: 'Done',
@@ -177,6 +188,7 @@ class _TaskBoardScreenState extends ConsumerState<TaskBoardScreen> {
                     onTaskDropped: (task, status) =>
                         _updateTaskStatus(ref, task, status),
                     onTaskTap: (task) => _openTaskDetails(context, task),
+                    onTaskDismissed: (task) => _deleteTask(context, ref, task),
                   ),
                 ],
               ),
@@ -288,6 +300,14 @@ class _TaskBoardScreenState extends ConsumerState<TaskBoardScreen> {
                       setDialogState(() => _dueDateFilter = val);
                     },
                   ),
+                  const SizedBox(height: 16),
+                  SwitchListTile(
+                    title: const Text('Show Archived Tasks'),
+                    value: _showArchived,
+                    onChanged: (val) {
+                      setDialogState(() => _showArchived = val);
+                    },
+                  ),
                 ],
               ),
               actions: [
@@ -297,7 +317,9 @@ class _TaskBoardScreenState extends ConsumerState<TaskBoardScreen> {
                     setState(() {
                       _assigneeFilterController.clear();
                       _priorityFilter = null;
+
                       _dueDateFilter = null;
+                      _showArchived = false;
                     });
                     Navigator.pop(context);
                   },
@@ -330,6 +352,8 @@ class _TaskBoardScreenState extends ConsumerState<TaskBoardScreen> {
       updatedAt: DateTime.now(),
       dueDate: task.dueDate,
       assigneeId: task.assigneeId,
+      permissions: task.permissions,
+      isArchived: task.isArchived,
     );
     ref.read(taskRepositoryProvider).updateTask(updatedTask);
   }
@@ -346,6 +370,24 @@ class _TaskBoardScreenState extends ConsumerState<TaskBoardScreen> {
       context: context,
       builder: (context) =>
           CreateTaskDialog(boardId: widget.boardId, taskToEdit: task),
+    );
+  }
+
+  void _deleteTask(BuildContext context, WidgetRef ref, TaskEntity task) {
+    final repo = ref.read(taskRepositoryProvider);
+    repo.deleteTask(task.id);
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        duration: Duration(seconds: 2),
+        content: Text('Task "${task.title}" deleted'),
+        action: SnackBarAction(
+          label: 'Undo',
+          onPressed: () {
+            repo.createTask(task);
+          },
+        ),
+      ),
     );
   }
 }

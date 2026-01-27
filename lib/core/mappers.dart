@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:drift/drift.dart';
 import 'package:flutter_task_board/features/board/domain/board.dart' as domain;
 import 'package:flutter_task_board/features/task/data/app_database.dart'
@@ -32,6 +33,15 @@ extension TaskEntityMapper on TaskEntity {
       priority: Value(priority.name),
       dueDate: Value(dueDate),
       assigneeId: Value(assigneeId),
+      // Encode permissions: Map<String, TaskRole> -> JSON String
+      permissions: Value(
+        jsonEncode(
+          permissions.entries
+              .map((e) => {'id': e.key, 'role': e.value.index})
+              .toList(),
+        ),
+      ),
+      isArchived: Value(isArchived),
       createdAt: Value(createdAt),
       updatedAt: Value(updatedAt),
     );
@@ -40,6 +50,22 @@ extension TaskEntityMapper on TaskEntity {
 
 extension TaskModelMapper on drift_db.Task {
   TaskEntity toEntity() {
+    // Decode permissions: JSON String -> Map<String, TaskRole>
+    final dynamic parsedJson = jsonDecode(permissions);
+    Map<String, TaskRole> parsedPermissions = {};
+
+    if (parsedJson is List) {
+      for (final item in parsedJson) {
+        final map = item as Map<String, dynamic>;
+        parsedPermissions[map['id'] as String] =
+            TaskRole.values[map['role'] as int];
+      }
+    } else if (parsedJson is Map) {
+      parsedJson.forEach((k, v) {
+        parsedPermissions[k] = TaskRole.values[v as int];
+      });
+    }
+
     return TaskEntity(
       id: id,
       boardId: boardId,
@@ -49,6 +75,8 @@ extension TaskModelMapper on drift_db.Task {
       priority: TaskPriority.values.byName(priority),
       dueDate: dueDate,
       assigneeId: assigneeId,
+      permissions: parsedPermissions,
+      isArchived: isArchived,
       createdAt: createdAt,
       updatedAt: updatedAt,
     );
