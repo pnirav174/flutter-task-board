@@ -23,7 +23,8 @@ class MyApp extends ConsumerWidget {
     final router = ref.watch(routerProvider);
     final themeMode = ref.watch(themeModeProvider);
     // Initialize SyncService
-    ref.watch(syncServiceProvider);
+    // ref.watch(syncServiceProvider);
+    ref.read(syncServiceProvider);
 
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
